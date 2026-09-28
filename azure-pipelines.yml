@@ -45,7 +45,7 @@ steps:
   inputs:
     SonarQube: 'sonarqube'
     scannerMode: 'cli'
-    cliScannerVersion: 'latest'
+   
     configMode: 'file'
     extraProperties: |
       # Additional properties that will be passed to the scanner, 
