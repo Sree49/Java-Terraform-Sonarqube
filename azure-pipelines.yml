@@ -23,13 +23,13 @@ steps:
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
+    sonarQubeRunAnalysis: false
 
 
 - task: CopyFiles@2
   inputs:
-    Contents: '**'
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**/target/*.?(war|jar)'
     TargetFolder: '$(build.artifactstagingdirectory)'
 
 
