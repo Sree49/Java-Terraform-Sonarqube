@@ -26,6 +26,7 @@ steps:
     sonarQubeRunAnalysis: false
 
 
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(System.DefaultWorkingDirectory)'
@@ -40,3 +41,19 @@ steps:
     publishLocation: 'Container'
 
 
+- task: SonarQubePrepare@8
+  inputs:
+    SonarQube: 'sonarqube'
+    scannerMode: 'cli'
+    cliScannerVersion: 'latest'
+    configMode: 'file'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner, 
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.java.binaries=target
+
+
+- task: SonarQubeAnalyze@8
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
