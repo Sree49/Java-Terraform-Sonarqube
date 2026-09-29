@@ -2,7 +2,7 @@ FROM eclipse-temurin:17-jre-alpine
 
 ENV APP_HOME /usr/src/app
 
-COPY target/*.jar $APP_HOME/app.jar
+COPY app.jar app.jar
 
 WORKDIR $APP_HOME
 
