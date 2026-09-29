@@ -128,6 +128,7 @@ stages:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
+            cp $(Pipeline.Workspace)/drop/*.jar app.jar
             az acr login --name $(acrname)
             docker build -t $(acrname).azurecr.io/$(imagename):$(tag) .
             docker push $(acrname).azurecr.io/$(imagename):$(tag)
