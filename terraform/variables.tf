@@ -6,7 +6,3 @@ variable "RG_Location" {
   type = string
 }
 
-variable "container-password" {
-  type = string
-  sensitive = true
-}
