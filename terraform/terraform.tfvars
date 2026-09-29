@@ -1,2 +1,2 @@
 RG_Location = "Canada Central"
-RG_Name = "RG"
+RG_Name = "RG1"
