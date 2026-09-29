@@ -18,13 +18,8 @@ stages:
       pool:
         name: 'sreenija'
       steps:
-      - task: JavaToolInstaller@0
-        inputs:
-          versionSpec: '17'
-          jdkSourceOption: 'PreInstalled' # Tells the task to look on the machine
-          jdkArchitectureOption: 'x64'
 
-   
+
       - task: Maven@4
         inputs:
           azureSubscription: 'azure-connection'
