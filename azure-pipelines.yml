@@ -21,6 +21,8 @@ stages:
 
 
       - task: Maven@4
+        env:
+          JAVA_HOME_17_X64: /usr/lib/jvm/java-17-openjdk-arm64
         inputs:
           azureSubscription: 'azure-connection'
           mavenPomFile: 'pom.xml'
@@ -34,6 +36,7 @@ stages:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
+        
 
 
       - task: CopyFiles@2
