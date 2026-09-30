@@ -145,7 +145,7 @@ stages:
       pool:
         vmImage: ubuntu-latest
       variables:
-        acrname: $[ stageDependencies.Provision.Provision_Infra.outputs['setvariable.acrname'] ]
+        acrname: $[ stageDependencies.Provision.Provision_Infra.outputs['setvariable.ACR_NAME'] ]
       steps:
       - task: DownloadBuildArtifacts@1
         inputs:
