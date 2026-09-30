@@ -18,25 +18,6 @@ stages:
       pool:
         name: 'sreenija'
       steps:
-
-
-      - task: Maven@4
-        env:
-          JAVA_HOME_17_X64: /usr/lib/jvm/java-17-openjdk-arm64
-        inputs:
-          azureSubscription: 'azure-connection'
-          mavenPomFile: 'pom.xml'
-          publishJUnitResults: true
-          testResultsFiles: '**/surefire-reports/TEST-*.xml'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: 1.17
-          jdkArchitectureOption: x64
-          mavenVersionOption: 'Default'
-          mavenOptions: '-Xmx3072m'
-          mavenAuthenticateFeed: false
-          effectivePomSkip: false
-          sonarQubeRunAnalysis: false
-
       - task: SonarQubePrepare@8
         inputs:
           SonarQube: 'sonarqube'
@@ -48,11 +29,23 @@ stages:
             sonar.java.binaries=.
             sonar.projectKey=Boardgame
             sonar.projectName=Boardgame
-
-      - task: SonarQubeAnalyze@8
+      - task: Maven@4
         inputs:
-          jdkversion: 'JAVA_HOME_17_X64'
-
+          azureSubscription: 'azure-connection'
+          mavenPomFile: 'pom.xml'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: 1.17
+          goals: 'clean package'
+          jdkArchitectureOption: x64
+          mavenVersionOption: 'Default'
+          mavenOptions: '-Xmx3072m'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: true
+          sqMavenPluginVersionChoice: 'pom'
+    
       - task: SonarQubePublish@8
         inputs:
           pollingTimeoutSec: '300'
