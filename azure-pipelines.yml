@@ -36,7 +36,18 @@ stages:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: false
-        
+
+      - task: SonarQubePrepare@8
+        inputs:
+          SonarQube: 'sonarqube'
+          scannerMode: 'other'
+          extraProperties: |
+            # Additional properties that will be passed to the scanner, 
+            # Put one key=value per line, example:
+            # sonar.exclusions=**/*.bin
+            sonar.java.binaries=.
+            sonar.projectKey=Boardgame
+            sonar.projectName=Boardgame
 
 
       - task: CopyFiles@2
