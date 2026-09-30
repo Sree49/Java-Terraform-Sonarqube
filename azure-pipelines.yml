@@ -51,7 +51,11 @@ stages:
         inputs:
           pollingTimeoutSec: '300'
       
-
+      - task: CopyFiles@2
+        inputs:
+          SourceFolder: '$(System.DefaultWorkingDirectory)'
+          Contents: 'deployment-service.yaml'
+          TargetFolder: '$(build.artifactstagingdirectory)'
 
       - task: CopyFiles@2
         inputs:
