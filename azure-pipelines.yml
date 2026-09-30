@@ -131,7 +131,7 @@ stages:
             workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
             inlineScript: |
               terraform output
-              ACR_NAME=$(terraform output -raw acr_name)
+              ACR_NAME=$(terraform output -raw container_name)
               echo "##vso[task.setvariable variable=acrname;isOutput=true]$ACR_NAME"
             name: setvariable
 
