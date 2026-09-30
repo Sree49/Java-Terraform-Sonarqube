@@ -170,5 +170,15 @@ stages:
             docker build -t $(acrname).azurecr.io/$(imagename):$(tag) .
             docker push $(acrname).azurecr.io/$(imagename):$(tag)
     
-        
+      - task: KubernetesManifest@1
+        inputs:
+          action: 'deploy'
+          connectionType: 'azureResourceManager'
+          azureSubscriptionConnection: 'azure-connection'
+          azureResourceGroup: 'RG1'
+          kubernetesCluster: 'kub-cluster'
+          useClusterAdmin: true
+          manifests: '**/deployment-service.yaml'
+          containers: |
+            $(acrname).azurecr.io/$(imagename):$(tag)
 
