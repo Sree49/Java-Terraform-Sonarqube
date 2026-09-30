@@ -6,7 +6,6 @@
 variables:
   imagename: gamebox
   tag: $(Build.BuildId)
-  acrname: 'acr12345'
 
 
 stages:
@@ -123,6 +122,14 @@ stages:
             commandOptions: '-auto-approve'
             environmentServiceNameAzureRM: 'azure-connection'
 
+      
+        - bash: |
+            acrname=$(terraform output -raw container_name)
+            echo "##vso[task.setvariable variable=acrname;isOutput=true]$acrname"
+          displayName: 'Export ACR Name'
+          name: setvariable
+          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+
 - stage: 'Deploy'
   displayName: 'Push image to ACR and Deploy code to Kubernetes'
   dependsOn: Provision
@@ -132,6 +139,8 @@ stages:
       displayName: 'Build Image'
       pool:
         vmImage: ubuntu-latest
+      variables:
+        acrname: $[ stageDependencies.Provision.Provision_Infra.outputs['setvariable.acrname'] ]
       steps:
       - task: DownloadBuildArtifacts@1
         inputs:
