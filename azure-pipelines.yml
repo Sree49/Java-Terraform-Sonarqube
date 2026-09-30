@@ -46,7 +46,7 @@ stages:
           mavenAuthenticateFeed: false
           effectivePomSkip: false
           sonarQubeRunAnalysis: true
-          sqMavenPluginVersionChoice: 'pom'
+          sqMavenPluginVersionChoice: 'latest'
     
       - task: SonarQubePublish@8
         inputs:
