@@ -49,6 +49,11 @@ stages:
             sonar.projectKey=Boardgame
             sonar.projectName=Boardgame
 
+      - task: SonarQubeAnalyze@8
+        inputs:
+          jdkversion: 'JAVA_HOME_17_X64'
+      
+
 
       - task: CopyFiles@2
         inputs:
