@@ -123,12 +123,17 @@ stages:
             environmentServiceNameAzureRM: 'azure-connection'
 
       
-        - bash: |
-            acrname=$(terraform output -raw container_name)
-            echo "##vso[task.setvariable variable=acrname;isOutput=true]$acrname"
-          displayName: 'Export ACR Name'
-          name: setvariable
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+        - task: AzureCLI@2
+          inputs:
+            azureSubscription: 'azure-connection'
+            scriptType: 'bash'
+            scriptLocation: 'inlineScript'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
+            inlineScript: |
+              terraform output
+              ACR_NAME=$(terraform output -raw acr_name)
+              echo "##vso[task.setvariable variable=acrname;isOutput=true]$ACR_NAME"
+            name: setvariable
 
 - stage: 'Deploy'
   displayName: 'Push image to ACR and Deploy code to Kubernetes'
