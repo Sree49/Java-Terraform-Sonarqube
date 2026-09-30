@@ -133,7 +133,7 @@ stages:
               terraform output
               ACR_NAME=$(terraform output -raw registry_name)
               echo "##vso[task.setvariable variable=acrname;isOutput=true]$ACR_NAME"
-            name: setvariable
+          name: setvariable
 
 - stage: 'Deploy'
   displayName: 'Push image to ACR and Deploy code to Kubernetes'
@@ -145,7 +145,7 @@ stages:
       pool:
         vmImage: ubuntu-latest
       variables:
-        acrname: $[ stageDependencies.Provision.Provision_Infra.outputs['setvariable.ACR_NAME'] ]
+        acrname: $[ stageDependencies.Provision.Provision_Infra.outputs['setvariable.acrname'] ]
       steps:
       - task: DownloadBuildArtifacts@1
         inputs:
@@ -160,6 +160,7 @@ stages:
           scriptType: 'bash'
           scriptLocation: 'inlineScript'
           inlineScript: |
+            echo "ACR Name is : $(acrname)"
             cp $(Pipeline.Workspace)/drop/target/*.jar app.jar
             az acr login --name $(acrname)
             docker build -t $(acrname).azurecr.io/$(imagename):$(tag) .
