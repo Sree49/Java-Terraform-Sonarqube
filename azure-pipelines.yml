@@ -30,6 +30,8 @@ stages:
             sonar.projectKey=Boardgame
             sonar.projectName=Boardgame
       - task: Maven@4
+        env:
+          JAVA_HOME_17_X64: /usr/lib/jvm/java-17-openjdk-arm64
         inputs:
           azureSubscription: 'azure-connection'
           mavenPomFile: 'pom.xml'
