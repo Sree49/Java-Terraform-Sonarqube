@@ -4,7 +4,7 @@ ENV APP_HOME=/usr/src/app
 
 WORKDIR $APP_HOME
 
-COPY app.jar .
+COPY app.jar app.jar
 
 EXPOSE 8080
 
