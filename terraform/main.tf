@@ -12,3 +12,10 @@ module "acr" {
     RG_Location = var.RG_Location
     depends_on = [module.rg]
 }
+
+module "aks" {
+    source = "./modules/aks"
+    RG_Name = var.RG_Name
+    RG_Location = var.RG_Location
+    depends_on = [module.rg]
+}
