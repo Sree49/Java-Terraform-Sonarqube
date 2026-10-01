@@ -177,6 +177,14 @@ stages:
             echo "Jar details:"
             ls -lah app.jar
             cp $(Pipeline.Workspace)/drop/target/*.jar app.jar
+            ls -lah
+
+            echo "Jar details:"
+            ls -lah app.jar
+
+            echo "Checking drop folder"
+            find $(Pipeline.Workspace) -type f | grep ".jar"
+            
             az acr login --name $(acrname)
             docker build -t $(acrname).azurecr.io/$(imagename):$(tag) .
             docker build -t $(acrname).azurecr.io/$(imagename):latest .
