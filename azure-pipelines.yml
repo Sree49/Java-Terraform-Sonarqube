@@ -174,7 +174,9 @@ stages:
             cp $(Pipeline.Workspace)/drop/target/*.jar app.jar
             az acr login --name $(acrname)
             docker build -t $(acrname).azurecr.io/$(imagename):$(tag) .
+            docker build -t $(acrname).azurecr.io/$(imagename):latest .
             docker push $(acrname).azurecr.io/$(imagename):$(tag)
+            docker push $(acrname).azurecr.io/$(imagename):latest
     
       
       - task: KubernetesManifest@1
