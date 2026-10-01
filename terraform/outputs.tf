@@ -7,5 +7,5 @@ output "aks_name" {
 }
 
 output "rg_name" {
-    value= module.rg.rg_name
+    value= module.rg.RG_Name
 }
