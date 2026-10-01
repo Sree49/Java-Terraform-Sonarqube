@@ -184,9 +184,10 @@ stages:
 
             echo "Checking drop folder"
             find $(Pipeline.Workspace) -type f | grep ".jar"
-            
+
             az acr login --name $(acrname)
             docker build -t $(acrname).azurecr.io/$(imagename):$(tag) .
+            docker run --rm $(acrname).azurecr.io/$(imagename):latest ls -l /usr/src/app
             docker build -t $(acrname).azurecr.io/$(imagename):latest .
             docker push $(acrname).azurecr.io/$(imagename):$(tag)
             docker push $(acrname).azurecr.io/$(imagename):latest
