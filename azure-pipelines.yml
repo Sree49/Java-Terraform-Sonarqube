@@ -62,6 +62,10 @@ stages:
           SourceFolder: '$(System.DefaultWorkingDirectory)'
           Contents: '**/target/*.?(war|jar)'
           TargetFolder: '$(build.artifactstagingdirectory)'
+      - script: |
+          cp $(Build.SourcesDirectory)/database_service_project-0.0.7-SNAPSHOT.jar \
+          $(Build.SourcesDirectory)/app.jar
+        displayName: 'Rename JAR'
 
 
       - task: PublishBuildArtifacts@1
@@ -171,20 +175,11 @@ stages:
           scriptLocation: 'inlineScript'
           inlineScript: |
             echo "ACR Name is : $(acrname)"
-            echo "Current directory contents:"
-            ls -lah
-
-            echo "Jar details:"
-            ls -lah app.jar
-            cp $(Pipeline.Workspace)/drop/target/*.jar app.jar
-            ls -lah
-
-            echo "Jar details:"
-            ls -lah app.jar
+           
 
             echo "Checking drop folder"
             find $(Pipeline.Workspace) -type f | grep ".jar"
-    
+            cp $(Pipeline.Workspace)/drop/target/*.jar app.jar
             az acr login --name $(acrname)
             docker build -t $(acrname).azurecr.io/$(imagename):$(tag) .
             docker build -t $(acrname).azurecr.io/$(imagename):latest .
