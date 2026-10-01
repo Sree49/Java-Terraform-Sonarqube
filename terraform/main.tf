@@ -17,5 +17,6 @@ module "aks" {
     source = "./modules/aks"
     RG_Name = var.RG_Name
     RG_Location = var.RG_Location
+    container-id = module.acr.container-id
     depends_on = [module.rg]
 }
