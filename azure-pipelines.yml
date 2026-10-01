@@ -63,7 +63,7 @@ stages:
           Contents: '**/target/*.?(war|jar)'
           TargetFolder: '$(build.artifactstagingdirectory)'
       - script: |
-          cp $(Build.SourcesDirectory)/database_service_project-0.0.7-SNAPSHOT.jar \
+          cp $(Build.SourcesDirectory)/target/database_service_project-0.0.7-SNAPSHOT.jar \
           $(Build.SourcesDirectory)/app.jar
         displayName: 'Rename JAR'
 
