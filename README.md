@@ -15,7 +15,8 @@ sudo docker run -d --name sonar -p 9000:9000 mc1arke/sonarqube-with-community-br
 
 sonarqube url: http://(self-hostedagent-publicip):9000 \
 admin, admin. It will ask to change passsword \
-for sonarqube token: Go to Administration-security-users-token) generate token and create service connection in azure devops project settings.
+for sonarqube token: Go to Administration-security-users-token) generate token and create service connection in azure devops project settings. \
+Create inbound rule to open 9000 port for self hosted VM.
 
 <img src="./images/sonarqube-token.png" alt="sonarqube-token" width="400">
   <img src="./images/sonarqube-projects.png" alt="sonarqube-projects" width="400">
