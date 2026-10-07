@@ -1,7 +1,8 @@
 Maven Project deployed to Kubernetes.
 
 Project Build Maven:
-Used self hosted agent.
+Used self hosted agent. \
+ <img src="./images/agent-pool.png" alt="agent-pool" width="400">
 
 Commands used to install maven: \
 sudo apt update \
@@ -16,6 +17,9 @@ sonarqube url: http://(self-hostedagent-publicip):9000 \
 admin, admin. It will ask to change passsword \
 for sonarqube token: Go to Administration-security-users-token) generate token and create service connection in azure devops project settings.
 
+<img src="./images/sonarqube-token.png" alt="sonarqube-token" width="400">
+  <img src="./images/sonarqube-projects.png" alt="sonarqube-projects" width="400">
+
 Add capabilities in self hosted agent - java=true, maven=true, jdk home.
 
 Steps: Sonarqube Prepare Analysis-> Maven Build-> Sonarqube Publish.
@@ -23,13 +27,23 @@ Steps: Sonarqube Prepare Analysis-> Maven Build-> Sonarqube Publish.
 Terraform: \
 Modules: \
 RG, ACR, AKS \
-ACR Pull resource code. 
+ACR Pull resource code. \
+Remote backend: Provide storage account blob data contributor access to azure rm service connection. \
+<img src="./images/storage-account-access.png" alt="storage-account-access" width="400">
 
 Dockerfile: to build image \
-deployment-service.yaml: to deploy kubernetes objects.
+<img src="./images/acr.png" alt="acr" width="400">
+
+deployment-service.yaml: to deploy kubernetes objects. \
+<img src="./images/kube-cluster.png" alt="kube-cluster" width="400">
 
 Azurerm service connection- to deploy resources. \
 sonarqube connection- to connect to sonarqube.
 
+<img src="./images/service-connection.png" alt="service-connection" width="400">
 
+APP:
 
+<img src="./images/RG.png" alt="RG" width="400">
+
+<img src="./images/app.png" alt="app" width="400">
